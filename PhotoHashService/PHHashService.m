@@ -59,7 +59,7 @@ static NSString * const StoredHashedObjectsKey = @"com.jpn.naru.hash_service.sto
 @interface PHHashService ()
 
 @property (nonatomic) NSMutableArray <PHHashedObject *> *hashedObjects;
-@property (nonatomic) NSMutableSet <NSString *> *completedLocalIdentifiers;
+@property (nonatomic) NSMutableArray <NSString *> *completedLocalIdentifiers;
 @property (nonatomic) dispatch_queue_t queue;
 @property (nonatomic) NSLock *lock;
 
@@ -89,14 +89,14 @@ static NSString * const StoredHashedObjectsKey = @"com.jpn.naru.hash_service.sto
             // load stored data
             NSMutableArray *hashedObjects = [NSKeyedUnarchiver unarchiveObjectWithData:data];
             self.hashedObjects = hashedObjects;
-            self.completedLocalIdentifiers = [NSMutableSet set];
+            self.completedLocalIdentifiers = [NSMutableArray array];
             for (PHHashedObject *hashedObject in self.hashedObjects) {
                 [self.completedLocalIdentifiers addObject:hashedObject.localIdentifier];
             }
         } else {
             // create new data
             self.hashedObjects = [NSMutableArray array];
-            self.completedLocalIdentifiers = [NSMutableSet set];
+            self.completedLocalIdentifiers = [NSMutableArray array];
         }
     }
     return self;
@@ -116,22 +116,16 @@ static NSString * const StoredHashedObjectsKey = @"com.jpn.naru.hash_service.sto
     NSLog(@"Hash service starts to hash.");
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            
-        PHFetchResult *result = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
+        
+        PHFetchOptions *fetchOptions = [PHFetchOptions new];
+        fetchOptions.predicate = [NSPredicate predicateWithFormat:@"NOT (localIdentifier IN %@)", self.completedLocalIdentifiers];
+        
+        PHFetchResult *result = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
         NSInteger count = result.count;
         
         [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop){
             
             PHHASHSERVICE_CANCEL_GUARD;
-            
-            // return here if content is already hashed
-            if ([self.completedLocalIdentifiers containsObject:asset.localIdentifier]) {
-                // finish
-                if (idx+1 == count) {
-                    [self completeHash];
-                }
-                return;
-            }
             
             dispatch_async(self.queue, ^{
                 
@@ -202,7 +196,7 @@ static NSString * const StoredHashedObjectsKey = @"com.jpn.naru.hash_service.sto
     _cancelled = YES;
     
     self.hashedObjects = [NSMutableArray array];
-    self.completedLocalIdentifiers = [NSMutableSet set];
+    self.completedLocalIdentifiers = [NSMutableArray array];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:StoredHashedObjectsKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
