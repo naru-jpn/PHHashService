@@ -25,16 +25,22 @@ static NSString * const StoredHashedObjectsKey = @"com.jpn.naru.hash_service.sto
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
-        self.localIdentifier = [aDecoder decodeObjectForKey:@"localIdentifier"];
-        self.hashString = [aDecoder decodeObjectForKey:@"hashString"];
+        _localIdentifier = [[aDecoder decodeObjectForKey:@"localIdentifier"] copy];
+        _hashString = [[aDecoder decodeObjectForKey:@"hashString"] copy];
+    }
+    return self;
+}
+
+- (instancetype)initWithLocalIdentifier:(NSString * _Nonnull)localIdentifier hashString:(NSString * _Nonnull)hashString {
+    if (self = [super init]) {
+        _localIdentifier = [localIdentifier copy];
+        _hashString = [hashString copy];
     }
     return self;
 }
 
 + (instancetype)hashedObjectWithLocalIdentifier:(NSString * _Nonnull)localIdentifier hashString:(NSString * _Nonnull)hashString {
-    PHHashedObject *hashedOject = [PHHashedObject new];
-    hashedOject.localIdentifier = localIdentifier;
-    hashedOject.hashString = hashString;
+    PHHashedObject *hashedOject = [[PHHashedObject alloc] initWithLocalIdentifier:localIdentifier hashString:hashString];
     return hashedOject;
 }
 
