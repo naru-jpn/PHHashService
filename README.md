@@ -24,5 +24,5 @@ Store current data if changes to store exist.
 Clear all data and cancel procedure.
 
 ```
-[[PHHashService sharedService] cancel];
+[[PHHashService sharedService] clear];
 ```
