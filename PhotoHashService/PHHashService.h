@@ -12,9 +12,9 @@
 
 @interface PHHashedObject : NSObject
 
-@property (nonatomic, copy) NSString *localIdentifier;
+@property (nonatomic, readonly) NSString *localIdentifier;
 
-@property (nonatomic, copy) NSString *hashString;
+@property (nonatomic, readonly) NSString *hashString;
 
 @end
 
