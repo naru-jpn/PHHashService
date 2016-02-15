@@ -1,5 +1,5 @@
 # PHHashService
-Calculate hash string for all local images and store them.
+Calculate hash string for all local images and store them. (Default hash algorithm is MD5.)
 
 
 ## How to use
