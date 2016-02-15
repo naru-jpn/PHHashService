@@ -13,6 +13,8 @@
 		43877F601C7062A800E4E310 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43877F5E1C7062A800E4E310 /* Main.storyboard */; };
 		43877F621C7062A800E4E310 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43877F611C7062A800E4E310 /* Assets.xcassets */; };
 		43877F651C7062A800E4E310 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43877F631C7062A800E4E310 /* LaunchScreen.storyboard */; };
+		43877F741C70719600E4E310 /* NSData+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 43877F731C70719600E4E310 /* NSData+Hash.m */; };
+		43877F771C7078B200E4E310 /* PHHashService.m in Sources */ = {isa = PBXBuildFile; fileRef = 43877F761C7078B200E4E310 /* PHHashService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,10 @@
 		43877F611C7062A800E4E310 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43877F641C7062A800E4E310 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43877F661C7062A800E4E310 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43877F721C70719600E4E310 /* NSData+Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Hash.h"; sourceTree = "<group>"; };
+		43877F731C70719600E4E310 /* NSData+Hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Hash.m"; sourceTree = "<group>"; };
+		43877F751C7078B200E4E310 /* PHHashService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHHashService.h; sourceTree = "<group>"; };
+		43877F761C7078B200E4E310 /* PHHashService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHHashService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,10 @@
 				43877F591C7062A800E4E310 /* AppDelegate.m */,
 				43877F5B1C7062A800E4E310 /* ViewController.h */,
 				43877F5C1C7062A800E4E310 /* ViewController.m */,
+				43877F751C7078B200E4E310 /* PHHashService.h */,
+				43877F761C7078B200E4E310 /* PHHashService.m */,
+				43877F721C70719600E4E310 /* NSData+Hash.h */,
+				43877F731C70719600E4E310 /* NSData+Hash.m */,
 				43877F5E1C7062A800E4E310 /* Main.storyboard */,
 				43877F611C7062A800E4E310 /* Assets.xcassets */,
 				43877F631C7062A800E4E310 /* LaunchScreen.storyboard */,
@@ -151,7 +161,9 @@
 			files = (
 				43877F5D1C7062A800E4E310 /* ViewController.m in Sources */,
 				43877F5A1C7062A800E4E310 /* AppDelegate.m in Sources */,
+				43877F741C70719600E4E310 /* NSData+Hash.m in Sources */,
 				43877F571C7062A800E4E310 /* main.m in Sources */,
+				43877F771C7078B200E4E310 /* PHHashService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +274,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PhotoHashService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jpn.naru.PhotoHashService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -273,6 +286,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = PhotoHashService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jpn.naru.PhotoHashService;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -298,6 +312,7 @@
 				43877F6B1C7062A800E4E310 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
